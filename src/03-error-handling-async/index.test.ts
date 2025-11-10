@@ -1,30 +1,35 @@
 // Uncomment the code below and write your tests
-// import { throwError, throwCustomError, resolveValue, MyAwesomeError, rejectCustomError } from './index';
+import { throwError, throwCustomError, resolveValue, MyAwesomeError, rejectCustomError } from './index';
 
 describe('resolveValue', () => {
   test('should resolve provided value', async () => {
-    // Write your test here
+    await expect(resolveValue(123)).resolves.toBe(123);
+    await expect(resolveValue(null)).resolves.toBe(null);
+    await expect(resolveValue(undefined)).resolves.toBe(undefined);
   });
 });
 
 describe('throwError', () => {
   test('should throw error with provided message', () => {
-    // Write your test here
+    const customMessage = 'Provided error message';
+    expect(() => throwError(customMessage)).toThrow(customMessage);
+    expect(() => throwError(customMessage)).toThrow(Error);
   });
 
   test('should throw error with default message if message is not provided', () => {
-    // Write your test here
+    expect(() => throwError()).toThrow('Oops!');
+    expect(() => throwError()).toThrow(Error);
   });
 });
 
 describe('throwCustomError', () => {
   test('should throw custom error', () => {
-    // Write your test here
+    expect(() => throwCustomError()).toThrow(MyAwesomeError);
   });
 });
 
 describe('rejectCustomError', () => {
   test('should reject custom error', async () => {
-    // Write your test here
+    await expect(rejectCustomError()).rejects.toThrow(MyAwesomeError);
   });
 });
